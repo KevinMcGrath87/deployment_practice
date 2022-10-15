@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = 'stylesheet' href = "{{url_for('static',filename = 'style.css')}}">
+</head>
+<body>
+    <div class = 'bar'>
+        <div class = 'Welcome'><h2> Welcome, {{user.first_name}}</h2></div>
+        <div class = 'links'><a href = '/new_recipe'>new recipe +</a><a href = '/logout'>logout</a></div>
+    </div>
+    <div class = 'table'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Under</th>
+                    <th>Posted By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                <tr>
+                    <td>{{recipe.recipe_name}}</td>
+                    <td>{{recipe.under}}</td>
+                    <td>{{recipe.user_name}}</td>
+                    <td><a href="/view_recipe/{{recipe.id}}" >view recipe</a>
+                        {% if recipe.user_id == user.id%}
+                            <a href = '/edit/{{recipe.id}}'>edit</a> <a href = '/delete/{{recipe.id}}'>delete</a>
+                        {%endif%}
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

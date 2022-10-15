@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = 'stylesheet' href = "{{url_for('static',filename = 'style.css')}}">
+</head>
+<body>
+    <div class = 'container'>
+        {%with messages = get_flashed_messages()%}
+        {%for message in messages%}
+        <p>{{message}}</p>
+        {%endfor%}
+        {%endwith%}
+        <div class = 'bar'><h2>Edit Recipe!</h2></div>
+        <div class = 'unit'>
+            <div class = 'title'><h2>{{recipe.recipe_name}}</h2></div>
+            <form class = 'form' action = '/update_recipe' method = 'post'>
+                <input type = 'hidden' name = 'id' value = '{{recipe.id}}'>
+                <label for = 'recipe_name'>Recipe Name:</label>
+                <input type = 'text' name = 'recipe_name' value = '{{recipe.recipe_name}}'>
+                <label for = 'description'>Description:</label>
+                <input type = 'text' name = 'description' value = '{{recipe.description}}'>
+                <label for = 'instructions'>Instructions:</label>
+                <input type = 'text' name = 'instructions' value = '{{recipe.instructions}}'>
+                <label for = 'created_at'>Date Made:</label>
+                <input type = 'date' name ='created_at' value = '{{recipe.created_at}}'>
+                <input type = 'radio' name = 'under' value = 'Yes' id = 'yes'>
+                <label for ='yes'>Yes</label>
+                <input type = 'radio' name = 'under' value = 'No' id = 'false'>
+                <label for = 'false'>No</label>
+                <input type = 'hidden' name = 'user_id' value = '{{recipe.user_id}}'>
+                <input type = 'submit'>
+            </form>
+        </div>
+</body>
+</html>
